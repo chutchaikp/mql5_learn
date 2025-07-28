@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+BTCUSD#,sell_stop,,,,2,123456
+BTCUSD#,buy_stop,,,,2,123456

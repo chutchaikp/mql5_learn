@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+US30Cash,sell_stop,44249.77,44379.17,44037.6,5,123456
+US30Cash,buy_stop,44368.42,44238.7,44557.98,5,123456

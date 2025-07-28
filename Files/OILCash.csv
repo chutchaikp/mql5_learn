@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+OILCash,sell_stop,,,,5,123456
+OILCash,buy_stop,,,,5,123456

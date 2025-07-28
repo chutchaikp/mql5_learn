@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+EURUSD#,sell_stop,,,,2,123456
+EURUSD#,buy_stop,,,,2,123456

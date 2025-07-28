@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+GOLD#,sell_stop,3298.84,3307.86,3283.74,10,123456
+GOLD#,buy_stop,3307.87,3297.46,3319.81,10,123456

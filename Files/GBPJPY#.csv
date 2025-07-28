@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+GBPJPY#,sell_stop,198.841,199.369,198.036,5,123456
+GBPJPY#,buy_stop,199.364,198.828,200.15,5,123456

@@ -1,0 +1,3 @@
+symbol,type,price,sl,tp,volume,magic
+BTCUSD#,sell_stop,107647.16,108341.58,106505.41,3,123456
+BTCUSD#,buy_stop,108288.21,107643.24,109200.21,3,123456
