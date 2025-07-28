@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2024, Allan Munene Mutiiria." //--- Set copyright information
 #property link      "https://forexalgo-trader.com"            //--- Link to the author's website
-#property version   "1.10"                                    //--- Version of the script
+#property version   "2.10"                                    //--- Version of the script
 
 #include <Trade/Trade.mqh>                                     //--- Include trade library
 CTrade obj_Trade;                                            //--- Create an instance of the CTrade class
