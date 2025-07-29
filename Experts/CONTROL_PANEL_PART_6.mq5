@@ -892,9 +892,9 @@ void createSection_Close() {
    obj_Btn_CLOSE_ALL.ColorBackground(clrPeru); //--- Set the background color
    obj_Btn_CLOSE_ALL.ColorBorder(clrPeru); //--- Set the border color
    obj_Btn_CLOSE_ALL.Text("Close All"); //--- Set the button text
-   obj_Btn_CLOSE_ALL.Color(clrBlack); //--- Set the text color
-   obj_Btn_CLOSE_ALL.Font("Calibri bold"); //--- Set the font style
-   obj_Btn_CLOSE_ALL.FontSize(14); //--- Set the font size
+   obj_Btn_CLOSE_ALL.Color(clrWhite); //--- Set the text color
+   //obj_Btn_CLOSE_ALL.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSE_ALL.FontSize(16); //--- Set the font size
 
    //--- CLOSE ALL SELL BUTTON
    obj_Btn_CLOSE_ALL_SELL.Create(0, Btn_CLOSE_ALL_SELL, 0, 40, 150, 0, 0); //--- Create the close all sell button
@@ -995,8 +995,8 @@ void createSection_Information() {
    obj_Lbl_ACC_NUMBER.Create(0, Lbl_ACC_NUMBER, 0, 40, 100, 0, 0); //--- Initialize label for Account Number
    obj_Lbl_ACC_NUMBER.Text("Account Number"); //--- Set label text to "Account Number"
    obj_Lbl_ACC_NUMBER.Color(clrWhite); //--- Set label color to white
-   obj_Lbl_ACC_NUMBER.Font("Calibri bold"); //--- Set label font to Calibri bold
-   obj_Lbl_ACC_NUMBER.FontSize(11); //--- Set label font size to 14
+   //obj_Lbl_ACC_NUMBER.Font("Calibri bold"); //--- Set label font to Calibri bold
+   //obj_Lbl_ACC_NUMBER.FontSize(11); //--- Set label font size to 14
 
    //--- Create Account Number Button
    obj_Btn_ACC_NUMBER.Create(0, Btn_ACC_NUMBER, 0, 40 + 140, 100 + 2, 0, 0); //--- Initialize button for Account Number
@@ -1005,15 +1005,15 @@ void createSection_Information() {
    obj_Btn_ACC_NUMBER.ColorBorder(clrWhite); //--- Set button border color to white
    obj_Btn_ACC_NUMBER.Text(IntegerToString(AccountInfoInteger(ACCOUNT_LOGIN))); //--- Set button text with account number
    obj_Btn_ACC_NUMBER.Color(clrBlack); //--- Set button text color to black
-   obj_Btn_ACC_NUMBER.Font("Calibri bold"); //--- Set button font to Calibri bold
-   obj_Btn_ACC_NUMBER.FontSize(11); //--- Set button font size to 13
+   // obj_Btn_ACC_NUMBER.Font("Calibri bold"); //--- Set button font to Calibri bold
+   // obj_Btn_ACC_NUMBER.FontSize(11); //--- Set button font size to 13
 
    //--- Create Account Name Label
    obj_Lbl_ACC_NAME.Create(0, Lbl_ACC_NAME, 0, 40, 125, 0, 0); //--- Initialize label for Account Name
    obj_Lbl_ACC_NAME.Text("Account Name"); //--- Set label text to "Account Name"
    obj_Lbl_ACC_NAME.Color(clrWhite); //--- Set label color to white
-   obj_Lbl_ACC_NAME.Font("Calibri bold"); //--- Set label font to Calibri bold
-   obj_Lbl_ACC_NAME.FontSize(11); //--- Set label font size to 14
+   // obj_Lbl_ACC_NAME.Font("Calibri bold"); //--- Set label font to Calibri bold
+   // obj_Lbl_ACC_NAME.FontSize(11); //--- Set label font size to 14
 
    //--- Create Account Name Button
    obj_Btn_ACC_NAME.Create(0, Btn_ACC_NAME, 0, 40 + 140, 125 + 2, 0, 0); //--- Initialize button for Account Name
@@ -1022,15 +1022,15 @@ void createSection_Information() {
    obj_Btn_ACC_NAME.ColorBorder(clrWhite); //--- Set button border color to white
    obj_Btn_ACC_NAME.Text(AccountInfoString(ACCOUNT_SERVER)); //--- Set button text with account server name
    obj_Btn_ACC_NAME.Color(clrBlack); //--- Set button text color to black
-   obj_Btn_ACC_NAME.Font("Calibri bold"); //--- Set button font to Calibri bold
-   obj_Btn_ACC_NAME.FontSize(11); //--- Set button font size to 13
+   //obj_Btn_ACC_NAME.Font("Calibri bold"); //--- Set button font to Calibri bold
+   //obj_Btn_ACC_NAME.FontSize(11); //--- Set button font size to 13
 
    //--- Create Account Type Label
    obj_Lbl_ACC_TYPE.Create(0, Lbl_ACC_TYPE, 0, 40, 150, 0, 0); //--- Initialize label for Account Type
    obj_Lbl_ACC_TYPE.Text("Account Type"); //--- Set label text to "Account Type"
    obj_Lbl_ACC_TYPE.Color(clrWhite); //--- Set label color to white
-   obj_Lbl_ACC_TYPE.Font("Calibri bold"); //--- Set label font to Calibri bold
-   obj_Lbl_ACC_TYPE.FontSize(11); //--- Set label font size to 14
+   //obj_Lbl_ACC_TYPE.Font("Calibri bold"); //--- Set label font to Calibri bold
+   //obj_Lbl_ACC_TYPE.FontSize(11); //--- Set label font size to 14
 
    //--- Create Account Type Button
    obj_Btn_ACC_TYPE.Create(0, Btn_ACC_TYPE, 0, 40 + 140, 150 + 2, 0, 0); //--- Initialize button for Account Type
@@ -1052,15 +1052,15 @@ void createSection_Information() {
    }
    obj_Btn_ACC_TYPE.Text(trade_mode); //--- Set button text to account type description
    obj_Btn_ACC_TYPE.Color(clrBlack); //--- Set button text color to black
-   obj_Btn_ACC_TYPE.Font("Calibri bold"); //--- Set button font to Calibri bold
-   obj_Btn_ACC_TYPE.FontSize(11); //--- Set button font size to 13
+   //obj_Btn_ACC_TYPE.Font("Calibri bold"); //--- Set button font to Calibri bold
+   //obj_Btn_ACC_TYPE.FontSize(11); //--- Set button font size to 13
 
    //--- Create Account Leverage Label
    obj_Lbl_ACC_LEVERAGE.Create(0, Lbl_ACC_LEVERAGE, 0, 40, 175, 0, 0); //--- Initialize label for Account Leverage
    obj_Lbl_ACC_LEVERAGE.Text("Account Leverage"); //--- Set label text to "Account Leverage"
    obj_Lbl_ACC_LEVERAGE.Color(clrWhite); //--- Set label color to white
-   obj_Lbl_ACC_LEVERAGE.Font("Calibri bold"); //--- Set label font to Calibri bold
-   obj_Lbl_ACC_LEVERAGE.FontSize(11); //--- Set label font size to 14
+   //obj_Lbl_ACC_LEVERAGE.Font("Calibri bold"); //--- Set label font to Calibri bold
+   //obj_Lbl_ACC_LEVERAGE.FontSize(11); //--- Set label font size to 14
 
    //--- Create Account Leverage Button
    obj_Btn_ACC_LEVERAGE.Create(0, Btn_ACC_LEVERAGE, 0, 40 + 140, 175 + 2, 0, 0); //--- Initialize button for Account Leverage
@@ -1069,14 +1069,14 @@ void createSection_Information() {
    obj_Btn_ACC_LEVERAGE.ColorBorder(clrWhite); //--- Set button border color to white
    obj_Btn_ACC_LEVERAGE.Text(IntegerToString(AccountInfoInteger(ACCOUNT_LEVERAGE))); //--- Set button text with account leverage
    obj_Btn_ACC_LEVERAGE.Color(clrBlack); //--- Set button text color to black
-   obj_Btn_ACC_LEVERAGE.Font("Calibri bold"); //--- Set button font to Calibri bold
-   obj_Btn_ACC_LEVERAGE.FontSize(11); //--- Set button font size to 13
+   //obj_Btn_ACC_LEVERAGE.Font("Calibri bold"); //--- Set button font to Calibri bold
+   //obj_Btn_ACC_LEVERAGE.FontSize(11); //--- Set button font size to 13
 
    //--- Create Account Equity Label
    obj_Lbl_ACC_EQUITY.Create(0, Lbl_ACC_EQUITY, 0, 40, 220, 0, 0); //--- Initialize label for Account Equity
    obj_Lbl_ACC_EQUITY.Text("Account Equity"); //--- Set label text to "Account Equity"
    obj_Lbl_ACC_EQUITY.Color(clrAqua); //--- Set label color to Aqua
-   obj_Lbl_ACC_EQUITY.Font("Cooper Black"); //--- Set label font to Cooper Black
+   //obj_Lbl_ACC_EQUITY.Font("Cooper Black"); //--- Set label font to Cooper Black
    obj_Lbl_ACC_EQUITY.FontSize(14); //--- Set label font size to 14
 
    //--- Create Account Equity Button
@@ -1086,14 +1086,14 @@ void createSection_Information() {
    obj_Btn_ACC_EQUITY.ColorBorder(clrBlack); //--- Set button border color to Blanched Almond
    obj_Btn_ACC_EQUITY.Text(DoubleToString(AccountInfoDouble(ACCOUNT_EQUITY), 2)); //--- Set button text with account equity
    obj_Btn_ACC_EQUITY.Color(clrWhite); //--- Set button text color to white
-   obj_Btn_ACC_EQUITY.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
-   obj_Btn_ACC_EQUITY.FontSize(13); //--- Set button font size to 13
+   //obj_Btn_ACC_EQUITY.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
+   obj_Btn_ACC_EQUITY.FontSize(14); //--- Set button font size to 13
 
    //--- Create Account Balance Label
    obj_Lbl_ACC_BALANCE.Create(0, Lbl_ACC_BALANCE, 0, 40, 245, 0, 0); //--- Initialize label for Account Balance
    obj_Lbl_ACC_BALANCE.Text("Account Balance"); //--- Set label text to "Account Balance"
    obj_Lbl_ACC_BALANCE.Color(clrAqua); //--- Set label color to Aqua
-   obj_Lbl_ACC_BALANCE.Font("Cooper Black"); //--- Set label font to Cooper Black
+   //obj_Lbl_ACC_BALANCE.Font("Cooper Black"); //--- Set label font to Cooper Black
    obj_Lbl_ACC_BALANCE.FontSize(14); //--- Set label font size to 14
 
    //--- Create Account Balance Button
@@ -1103,14 +1103,14 @@ void createSection_Information() {
    obj_Btn_ACC_BALANCE.ColorBorder(clrBlack); //--- Set button border color to Blanched Almond
    obj_Btn_ACC_BALANCE.Text(DoubleToString(AccountInfoDouble(ACCOUNT_BALANCE), 2)); //--- Set button text with account balance
    obj_Btn_ACC_BALANCE.Color(clrWhite); //--- Set button text color to white
-   obj_Btn_ACC_BALANCE.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
-   obj_Btn_ACC_BALANCE.FontSize(13); //--- Set button font size to 13
+   //obj_Btn_ACC_BALANCE.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
+   obj_Btn_ACC_BALANCE.FontSize(14); //--- Set button font size to 13
 
    //--- Create Server Time Label
    obj_Lbl_TIME.Create(0, Lbl_TIME, 0, 40, 270, 0, 0); //--- Initialize label for Server Time
    obj_Lbl_TIME.Text("Server Time"); //--- Set label text to "Server Time"
    obj_Lbl_TIME.Color(clrLime); //--- Set label color to Lime
-   obj_Lbl_TIME.Font("Cooper Black"); //--- Set label font to Cooper Black
+   //obj_Lbl_TIME.Font("Cooper Black"); //--- Set label font to Cooper Black
    obj_Lbl_TIME.FontSize(14); //--- Set label font size to 14
 
    //--- Create Server Time Button
@@ -1120,7 +1120,7 @@ void createSection_Information() {
    obj_Btn_TIME.ColorBorder(clrBlack); //--- Set button border color to Blanched Almond
    obj_Btn_TIME.Text(TimeToString(TimeTradeServer(), TIME_DATE | TIME_SECONDS)); //--- Set button text with server time
    obj_Btn_TIME.Color(clrWhite); //--- Set button text color to white
-   obj_Btn_TIME.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
+   //obj_Btn_TIME.Font("Times new roman bold"); //--- Set button font to Times New Roman bold
    obj_Btn_TIME.FontSize(13); //--- Set button font size to 13
 }
 
