@@ -167,7 +167,7 @@ int OnInit() {
    //obj_Btn_X.FontSize(17); //--- Set font size of the close button
 
    //--- HEADER LABEL
-   obj_Lbl_HEADER.Create(0, Lbl_HEADER, 0, 45, 33, 0, 0); //--- Create the header label at specified coordinates
+   obj_Lbl_HEADER.Create(0, Lbl_HEADER, 0, 40, 33, 0, 0); //--- Create the header label at specified coordinates
    obj_Lbl_HEADER.Text("Control Panel"); //--- Set text of the header label
    // obj_Lbl_HEADER.Color(clrRed); //--- Set text color of the header label
    obj_Lbl_HEADER.Color(clrBlack); //--- Set text color of the header label
@@ -175,7 +175,7 @@ int OnInit() {
    // obj_Lbl_HEADER.FontSize(11); //--- Set font size of the header label
 
    //--- TRADE BUTTON
-   obj_Btn_TRADE.Create(0, Btn_TRADE, 0, 40, 60, 0, 0); //--- Create the trade button at specified coordinates
+   obj_Btn_TRADE.Create(0, Btn_TRADE, 0, 40, 60+3, 0, 0); //--- Create the trade button at specified coordinates
    obj_Btn_TRADE.Size(90, 30); //--- Set size of the trade button
    obj_Btn_TRADE.ColorBackground(clrDimGray); //--- Set background color of the trade button
    // obj_Btn_TRADE.ColorBorder(clrYellow); //--- Set border color of the trade button
@@ -186,7 +186,7 @@ int OnInit() {
    obj_Btn_TRADE.FontSize(11); //--- Set font size of the trade button
 
    //--- CLOSE BUTTON
-   obj_Btn_CLOSE.Create(0, Btn_CLOSE, 0, 40 + obj_Btn_TRADE.Width() + 10, 60, 0, 0); //--- Create the close button at specified coordinates
+   obj_Btn_CLOSE.Create(0, Btn_CLOSE, 0, 40 + obj_Btn_TRADE.Width() + 10, 60+3, 0, 0); //--- Create the close button at specified coordinates
    obj_Btn_CLOSE.Size(90, 30); //--- Set size of the close button
    obj_Btn_CLOSE.ColorBackground(clrSilver); //--- Set background color of the close button
    obj_Btn_CLOSE.ColorBorder(clrSilver); //--- Set border color of the close button
@@ -197,7 +197,7 @@ int OnInit() {
    obj_Btn_CLOSE.FontSize(11); //--- Set font size of the close button
 
    //--- INFO BUTTON
-   obj_Btn_INFO.Create(0, Btn_INFO, 0, 40 + obj_Btn_TRADE.Width() + 10 + obj_Btn_CLOSE.Width() + 10, 60, 0, 0); //--- Create the info button at specified coordinates
+   obj_Btn_INFO.Create(0, Btn_INFO, 0, 40 + obj_Btn_TRADE.Width() + 10 + obj_Btn_CLOSE.Width() + 10, 60+3, 0, 0); //--- Create the info button at specified coordinates
    obj_Btn_INFO.Size(90, 30); //--- Set size of the info button
    obj_Btn_INFO.ColorBackground( clrSilver ); //--- Set background color of the info button
    // obj_Btn_INFO.ColorBorder(clrSilver); //--- Set border color of the info button
@@ -278,6 +278,17 @@ void OnChartEvent(
 ) {
    // Print the 4 function parameters
    //Print("ID = ",id,", LPARAM = ",lparam,", DPARAM = ",dparam,", SPARAM = ",sparam);
+   
+   // timeframe M30
+   double tp_sl_point_default = 500;
+   string sym_ = _Symbol;
+   if (sym_ == "GOLD#") {
+      tp_sl_point_default = 500;
+   } else if (sym_ == "BTCUSD#") {
+      tp_sl_point_default = 20000;
+   } else if (sym_ == "US500Cash" ) {
+      // = ?
+   }
 
    // Check if the event is a click on a chart object
    if (id == CHARTEVENT_OBJECT_CLICK) {
@@ -402,8 +413,12 @@ void OnChartEvent(
          double lots = StringToDouble(obj_Edit_LOTS.Text()); //--- Get the lot size from input field
          double entry_price = Bid; //--- Set the entry price for selling to the current bid price
          // double stopLoss = obj_Edit_SL.Text()=="0" ?  : Ask+StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
-         double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(500*_Point) : StringToDouble(obj_Edit_SL.Text()) ; 
-         double takeprofit = obj_Edit_TP.Text()=="0" ? Ask-(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
+         
+         //double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(500*_Point) : StringToDouble(obj_Edit_SL.Text()) ; 
+         //double takeprofit = obj_Edit_TP.Text()=="0" ? Ask-(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
+         
+         double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()) ; 
+         double takeprofit = obj_Edit_TP.Text()=="0" ? Ask-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
          Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
          obj_Trade.Sell(lots,_Symbol,entry_price,stopLoss,takeprofit); //--- Execute the sell order
@@ -417,8 +432,14 @@ void OnChartEvent(
          double entry_price = Ask; //--- Set the entry price for buying to the current ask price
          //double stopLoss = Bid-StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
          //double takeprofit = Bid+StringToDouble(obj_Edit_TP.Text())*_Point; //--- Calculate take profit based on user input
-         double stopLoss = obj_Edit_SL.Text()=="0" ? Bid-(500*_Point) : StringToDouble(obj_Edit_SL.Text()); //--- Calculate stop loss based on user input
-         double takeprofit = obj_Edit_TP.Text()=="0" ? Bid+(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
+         
+         // TODO: 
+         // - if BTCUSD set default sl/tp = 1000
+         // - if XAUUSD set default sl/tp = 1000
+         // ?
+         
+         double stopLoss = obj_Edit_SL.Text()=="0" ? Bid-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()); //--- Calculate stop loss based on user input
+         double takeprofit = obj_Edit_TP.Text()=="0" ? Bid+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
          Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
          obj_Trade.Buy(lots,_Symbol,entry_price,stopLoss,takeprofit); //--- Execute the buy order
@@ -462,8 +483,8 @@ void OnChartEvent(
             double entry_price = user_price; //--- Set the entry price for the buy stop order
             //double stopLoss = user_price-StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
             //double takeprofit = user_price+StringToDouble(obj_Edit_TP.Text())*_Point; //--- Calculate take profit based on user input
-            double stopLoss = obj_Edit_SL.Text()=="0" ? user_price-(500*_Point) : StringToDouble(obj_Edit_SL.Text()); //--- Calculate stop loss based on user input
-            double takeprofit = obj_Edit_TP.Text()=="0" ? user_price+(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
+            double stopLoss = obj_Edit_SL.Text()=="0" ? user_price-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()); //--- Calculate stop loss based on user input
+            double takeprofit = obj_Edit_TP.Text()=="0" ? user_price+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
             Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
             obj_Trade.BuyStop(lots,entry_price,_Symbol,stopLoss,takeprofit); //--- Execute the buy stop order
