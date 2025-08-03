@@ -444,6 +444,9 @@ void OnChartEvent(
          Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
          obj_Trade.Buy(lots,_Symbol,entry_price,stopLoss,takeprofit); //--- Execute the buy order
       } else if (sparam==obj_Btn_SELLSTOP.Name()) { //--- Check if the Sell Stop button is clicked
+      
+         //|-----------SELLSTOP----------| 
+         
          Print("OBJECT CLICKED = ",obj_Btn_SELLSTOP.Name()); //--- Log the button click event
 
          double Ask = NormalizeDouble(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits); //--- Get and normalize the ask price
@@ -460,13 +463,16 @@ void OnChartEvent(
             double entry_price = user_price; //--- Set the entry price for the sell stop order
             //double stopLoss = user_price+StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
             //double takeprofit = user_price-StringToDouble(obj_Edit_TP.Text())*_Point; //--- Calculate take profit based on user input
-            double stopLoss = obj_Edit_SL.Text()=="0" ? user_price+(500*_Point) : StringToDouble(obj_Edit_SL.Text()) ; //--- Calculate stop loss based on user input
-            double takeprofit = obj_Edit_TP.Text()=="0" ? user_price-(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
+            double stopLoss = obj_Edit_SL.Text()=="0" ? user_price+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()) ; //--- Calculate stop loss based on user input
+            double takeprofit = obj_Edit_TP.Text()=="0" ? user_price-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
             Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
             obj_Trade.SellStop(lots,entry_price,_Symbol,stopLoss,takeprofit); //--- Execute the sell stop order
          }
       } else if (sparam==obj_Btn_BUYSTOP.Name()) { //--- Check if the Buy Stop button is clicked
+      
+         //|-----------BUYSTOP----------| 
+      
          Print("OBJECT CLICKED = ",obj_Btn_BUYSTOP.Name()); //--- Log the button click event
 
          double Ask = NormalizeDouble(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits); //--- Get and normalize the ask price
