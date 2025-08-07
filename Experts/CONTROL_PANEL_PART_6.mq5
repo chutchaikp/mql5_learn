@@ -542,6 +542,33 @@ void OnChartEvent(
       }
 
 
+
+
+// CLOSE HALF - obj_Btn_ENTRY
+// obj_Trade
+      else if (sparam==obj_Btn_ENTRY.Name()) {
+         Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
+         for (int i = PositionsTotal() -1; i >= 0; i--) { //--- Loop through all positions
+            ulong pos_ticket = PositionGetTicket(i); //--- Get the ticket of the position
+            
+            if (pos_ticket > 0) { //--- Check if the position ticket is valid
+               if (PositionSelectByTicket(pos_ticket)) { //--- Select the position by ticket
+                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) { //--- Check if the position matches the symbol
+                     
+                     double volume_ = PositionGetDouble(POSITION_VOLUME);
+                     double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
+                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                   
+                     
+                     // obj_Trade.PositionClose(pos_ticket, //--- Close the position
+                  }
+               }
+            }
+         }
+         
+      }
+
+
+
       else if (sparam==obj_Btn_CLOSE_ALL.Name()) { //--- Check if the Close All button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_CLOSE_ALL.Name()); //--- Log the button click event
 
@@ -844,6 +871,9 @@ void createSection_Trade() {
    obj_Btn_SELL.Color(clrWhite); //--- Set the text color
    obj_Btn_SELL.Font("Calibri bold"); //--- Set the font style
    obj_Btn_SELL.FontSize(14); //--- Set the font size
+
+
+// TODO: CLOSE HALF
 
    //--- ENTRY BUTTON
    obj_Btn_ENTRY.Create(0,Btn_ENTRY,0,150,y_+(30*4)+3,0,0); //--- Create the entry button
