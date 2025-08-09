@@ -288,6 +288,7 @@ void OnChartEvent(
       tp_sl_point_default = 20000;
    } else if (sym_ == "US500Cash" ) {
       // = ?
+      tp_sl_point_default = 1000;
    }
 
    // Check if the event is a click on a chart object
@@ -556,6 +557,11 @@ void OnChartEvent(
                   if (PositionGetString(POSITION_SYMBOL)==_Symbol) { //--- Check if the position matches the symbol
                      
                      double volume_ = PositionGetDouble(POSITION_VOLUME);
+                     
+                     // TODO: VOLUME ISSUE ? IF NOT EVENT NUMBER ?
+                     // % 
+                     // 100.1 US500Cash issue ?
+                     
                      double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
                      obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                   
                      
@@ -790,13 +796,13 @@ void createSection_Trade() {
 
    //--- LOTS EDIT
    obj_Edit_LOTS.Create(0,Edit_LOTS,0,x_+145,y_,0,0); //--- Create the lot size edit field
-   obj_Edit_LOTS.Size(50,25); //--- Set the edit field size
+   obj_Edit_LOTS.Size(76,25); //--- Set the edit field size
    obj_Edit_LOTS.ColorBackground(clrWhite); //--- Set the background color
    obj_Edit_LOTS.ColorBorder(clrBlack); //--- Set the border color
    obj_Edit_LOTS.Text("0.01"); //--- Set the default text
    obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
    obj_Edit_LOTS.Font("Times new roman bold"); //--- Set the font style
-   obj_Edit_LOTS.FontSize(13); //--- Set the font size
+   obj_Edit_LOTS.FontSize(15); //--- Set the font size
    
    //--- PRICE LABEL
    obj_Lbl_PRICE.Create(0,Lbl_PRICE,0,x_,y_+30,0,0); //--- Create the price label
@@ -813,7 +819,7 @@ void createSection_Trade() {
    obj_Edit_PRICE.Text(DoubleToString(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits)); //--- Set the default text to current ask price
    obj_Edit_PRICE.Color(clrBlack); //--- Set the text color
    obj_Edit_PRICE.Font("Times new roman bold"); //--- Set the font style
-   obj_Edit_PRICE.FontSize(13); //--- Set the font size
+   obj_Edit_PRICE.FontSize(15); //--- Set the font size
 
 
 
@@ -833,7 +839,7 @@ void createSection_Trade() {
    obj_Edit_SL.Text("0"); //--- Set the default text
    obj_Edit_SL.Color(clrBlack); //--- Set the text color
    obj_Edit_SL.Font("Times new roman bold"); //--- Set the font style
-   obj_Edit_SL.FontSize(13); //--- Set the font size
+   obj_Edit_SL.FontSize(15); //--- Set the font size
 
    //--- TP LABEL
    obj_Lbl_TP.Create(0,Lbl_TP,0,x_,y_+30+30+30,0,0); //--- Create the take profit label
@@ -850,7 +856,7 @@ void createSection_Trade() {
    obj_Edit_TP.Text("0"); //--- Set the default text
    obj_Edit_TP.Color(clrBlack); //--- Set the text color
    obj_Edit_TP.Font("Times new roman bold"); //--- Set the font style
-   obj_Edit_TP.FontSize(13); //--- Set the font size
+   obj_Edit_TP.FontSize(15); //--- Set the font size
 
    ////--- POINTS BUTTON
    //obj_Btn_POINTS.Create(0,Btn_POINTS,0,40+110,y_+30,0,0); //--- Create the points button
@@ -902,8 +908,10 @@ void createSection_Trade() {
    //--- SELL STOP BUTTON
    obj_Btn_SELLSTOP.Create(0,Btn_SELLSTOP,0,x_,y_+(30*5)+25+3,0,0); //--- Create the sell stop button
    obj_Btn_SELLSTOP.Size(140,25*2-3-3); //--- Set the button size
-   obj_Btn_SELLSTOP.ColorBackground(clrOrangeRed); //--- Set the background color
-   obj_Btn_SELLSTOP.ColorBorder(clrOrangeRed); //--- Set the border color
+   //obj_Btn_SELLSTOP.ColorBackground(clrOrangeRed); //--- Set the background color
+   //obj_Btn_SELLSTOP.ColorBorder(clrOrangeRed); //--- Set the border color
+   obj_Btn_SELLSTOP.ColorBackground(clrTomato); //--- Set the background color
+   obj_Btn_SELLSTOP.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_SELLSTOP.Text("Sell Stop"); //--- Set the button text
    obj_Btn_SELLSTOP.Color(clrWhite); //--- Set the text color
    obj_Btn_SELLSTOP.Font("Calibri bold"); //--- Set the font style
@@ -912,8 +920,10 @@ void createSection_Trade() {
    //--- BUY STOP BUTTON
    obj_Btn_BUYSTOP.Create(0,Btn_BUYSTOP,0,40+190-40,y_+(30*5)+25+3,0,0); //--- Create the buy stop button
    obj_Btn_BUYSTOP.Size(140,25*2-3-3); //--- Set the button size
-   obj_Btn_BUYSTOP.ColorBackground(clrLimeGreen); //--- Set the background color
-   obj_Btn_BUYSTOP.ColorBorder(clrLimeGreen); //--- Set the border color
+   //obj_Btn_BUYSTOP.ColorBackground(clrLimeGreen); //--- Set the background color
+   //obj_Btn_BUYSTOP.ColorBorder(clrLimeGreen); //--- Set the border color
+   obj_Btn_BUYSTOP.ColorBackground(clrDarkSeaGreen); //--- Set the background color
+   obj_Btn_BUYSTOP.ColorBorder(clrDarkSeaGreen); //--- Set the border color
    obj_Btn_BUYSTOP.Text("Buy Stop"); //--- Set the button text
    obj_Btn_BUYSTOP.Color(clrWhite); //--- Set the text color
    obj_Btn_BUYSTOP.Font("Calibri bold"); //--- Set the font style
