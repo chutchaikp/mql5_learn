@@ -346,85 +346,86 @@ void OnChartEvent(
          // Create the Trade section, bringing it to the forefront
          createSection_Trade();
       }
-      // Check if the clicked object is the Close button
-      else if (sparam==obj_Btn_CLOSE.Name()) {
-         // Print to the log which object was clicked for debugging purposes
-         Print("OBJECT CLICKED = ", obj_Btn_CLOSE.Name());
-
-         // Reset the pressed states of all buttons
-         obj_Btn_TRADE.Pressed(false);
-         obj_Btn_CLOSE.Pressed(false);
-         obj_Btn_INFO.Pressed(false);
-
-         // Set the background color of the Trade button to silver, indicating it's inactive
-         obj_Btn_TRADE.ColorBackground(clrSilver);
-         // Change the background color of the Close button to yellow to indicate it is active
-         obj_Btn_CLOSE.ColorBackground(clrDimGray);
-         obj_Btn_INFO.ColorBackground(clrSilver);
-
-         //// Set the border color of the Trade button to silver
-         //obj_Btn_TRADE.ColorBorder(clrSilver);
-         //// Set the border color of the Close button to yellow
-         //obj_Btn_CLOSE.ColorBorder(clrYellow);
-         //obj_Btn_INFO.ColorBorder(clrSilver);
-         obj_Btn_TRADE.Color(clrBlack);
-         obj_Btn_CLOSE.Color(clrWhite);
-         obj_Btn_INFO.Color(clrBlack);
-
-         // Call a function to destroy the Trade section if it exists
-         destroySection_Trade();
-         // Call a function to destroy the Information section if it exists
-         destroySection_Information();
-
-         // Create the Close section, bringing it to the forefront
-         createSection_Close();
-      }
-      // Check if the clicked object is the Information button
-      else if (sparam==obj_Btn_INFO.Name()) {
-         // Print to the log which object was clicked for debugging purposes
-         Print("OBJECT CLICKED = ", obj_Btn_INFO.Name());
-
-         // Reset the pressed states of all buttons
-         obj_Btn_TRADE.Pressed(false);
-         obj_Btn_CLOSE.Pressed(false);
-         obj_Btn_INFO.Pressed(false);
-
-         // Set the background color of the Trade and Close buttons to silver, indicating they are inactive
-         obj_Btn_TRADE.ColorBackground(clrSilver);
-         obj_Btn_CLOSE.ColorBackground(clrSilver);
-         // Change the background color of the Info button to yellow to indicate it is active
-         obj_Btn_INFO.ColorBackground(clrDimGray);
-
-         //// Set the border color of the Trade and Close buttons to silver
-         //obj_Btn_TRADE.ColorBorder(clrSilver);
-         //obj_Btn_CLOSE.ColorBorder(clrSilver);
-         //// Set the border color of the Info button to yellow
-         //obj_Btn_INFO.ColorBorder(clrYellow);
-         obj_Btn_TRADE.Color(clrBlack);
-         obj_Btn_CLOSE.Color(clrBlack);
-         obj_Btn_INFO.Color(clrWhite);
-
-         // Call a function to destroy the Trade section if it exists
-         destroySection_Trade();
-         // Call a function to destroy the Close section if it exists
-         destroySection_Close();
-
-         // Create the Information section, bringing it to the forefront
-         // createSection_Information();
-      }
-      // Check if the clicked object is the exit button (X button)
-      else if (sparam==obj_Btn_X.Name()) {
-         // Print to the log which object was clicked for debugging purposes
-         Print("OBJECT CLICKED = ", obj_Btn_X.Name());
-
-         // Call functions to destroy all sections, effectively closing the entire panel
-         destroySection_Trade();
-         destroySection_Close();
-         destroySection_Information();
-
-         // Call a function to destroy the main panel itself
-         destroySection_Main_Panel();
-      } else if (sparam==obj_Btn_SELL.Name()) { //--- Check if the Sell button is clicked
+//      // Check if the clicked object is the Close button
+//      else if (sparam==obj_Btn_CLOSE.Name()) {
+//         // Print to the log which object was clicked for debugging purposes
+//         Print("OBJECT CLICKED = ", obj_Btn_CLOSE.Name());
+//
+//         // Reset the pressed states of all buttons
+//         obj_Btn_TRADE.Pressed(false);
+//         obj_Btn_CLOSE.Pressed(false);
+//         obj_Btn_INFO.Pressed(false);
+//
+//         // Set the background color of the Trade button to silver, indicating it's inactive
+//         obj_Btn_TRADE.ColorBackground(clrSilver);
+//         // Change the background color of the Close button to yellow to indicate it is active
+//         obj_Btn_CLOSE.ColorBackground(clrDimGray);
+//         obj_Btn_INFO.ColorBackground(clrSilver);
+//
+//         //// Set the border color of the Trade button to silver
+//         //obj_Btn_TRADE.ColorBorder(clrSilver);
+//         //// Set the border color of the Close button to yellow
+//         //obj_Btn_CLOSE.ColorBorder(clrYellow);
+//         //obj_Btn_INFO.ColorBorder(clrSilver);
+//         obj_Btn_TRADE.Color(clrBlack);
+//         obj_Btn_CLOSE.Color(clrWhite);
+//         obj_Btn_INFO.Color(clrBlack);
+//
+//         // Call a function to destroy the Trade section if it exists
+//         destroySection_Trade();
+//         // Call a function to destroy the Information section if it exists
+//         destroySection_Information();
+//
+//         // Create the Close section, bringing it to the forefront
+//         createSection_Close();
+//      }
+//      // Check if the clicked object is the Information button
+//      else if (sparam==obj_Btn_INFO.Name()) {
+//         // Print to the log which object was clicked for debugging purposes
+//         Print("OBJECT CLICKED = ", obj_Btn_INFO.Name());
+//
+//         // Reset the pressed states of all buttons
+//         obj_Btn_TRADE.Pressed(false);
+//         obj_Btn_CLOSE.Pressed(false);
+//         obj_Btn_INFO.Pressed(false);
+//
+//         // Set the background color of the Trade and Close buttons to silver, indicating they are inactive
+//         obj_Btn_TRADE.ColorBackground(clrSilver);
+//         obj_Btn_CLOSE.ColorBackground(clrSilver);
+//         // Change the background color of the Info button to yellow to indicate it is active
+//         obj_Btn_INFO.ColorBackground(clrDimGray);
+//
+//         //// Set the border color of the Trade and Close buttons to silver
+//         //obj_Btn_TRADE.ColorBorder(clrSilver);
+//         //obj_Btn_CLOSE.ColorBorder(clrSilver);
+//         //// Set the border color of the Info button to yellow
+//         //obj_Btn_INFO.ColorBorder(clrYellow);
+//         obj_Btn_TRADE.Color(clrBlack);
+//         obj_Btn_CLOSE.Color(clrBlack);
+//         obj_Btn_INFO.Color(clrWhite);
+//
+//         // Call a function to destroy the Trade section if it exists
+//         destroySection_Trade();
+//         // Call a function to destroy the Close section if it exists
+//         destroySection_Close();
+//
+//         // Create the Information section, bringing it to the forefront
+//         // createSection_Information();
+//      }
+//      // Check if the clicked object is the exit button (X button)
+//      else if (sparam==obj_Btn_X.Name()) {
+//         // Print to the log which object was clicked for debugging purposes
+//         Print("OBJECT CLICKED = ", obj_Btn_X.Name());
+//
+//         // Call functions to destroy all sections, effectively closing the entire panel
+//         destroySection_Trade();
+//         destroySection_Close();
+//         destroySection_Information();
+//
+//         // Call a function to destroy the main panel itself
+//         destroySection_Main_Panel();
+//      } 
+      else if (sparam==obj_Btn_SELL.Name()) { //--- Check if the Sell button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_SELL.Name()); //--- Log the button click event
 
          double Ask = NormalizeDouble(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits); //--- Get and normalize the ask price
@@ -566,22 +567,22 @@ void OnChartEvent(
 
 // CLOSE HALF - obj_Btn_ENTRY
 // obj_Trade
-      else if (sparam==obj_Btn_ENTRY.Name() || sparam==obj_Btn_CLOSEHALF2.Name()) {
-         Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
-         for (int i = PositionsTotal() -1; i >= 0; i--) { 
-            ulong pos_ticket = PositionGetTicket(i);             
-            if (pos_ticket > 0) { 
-               if (PositionSelectByTicket(pos_ticket)) { 
-                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) {                      
-                     double volume_ = PositionGetDouble(POSITION_VOLUME);                     
-                     double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
-                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                     
-                  }
-               }
-            }
-         }
-         
-      }
+//      else if (sparam==obj_Btn_ENTRY.Name() || sparam==obj_Btn_CLOSEHALF2.Name()) {
+//         Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
+//         for (int i = PositionsTotal() -1; i >= 0; i--) { 
+//            ulong pos_ticket = PositionGetTicket(i);             
+//            if (pos_ticket > 0) { 
+//               if (PositionSelectByTicket(pos_ticket)) { 
+//                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) {                      
+//                     double volume_ = PositionGetDouble(POSITION_VOLUME);                     
+//                     double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
+//                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                     
+//                  }
+//               }
+//            }
+//         }
+//         
+//      }
 
 
 
@@ -971,7 +972,7 @@ void createSection_Trade() {
    obj_Btn_CLOSEALLSELL2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEALLSELL2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLSELL2.Text("CLOSE ALL SELL"); //--- Set the button text
-   obj_Btn_CLOSEALLSELL2.Color(clrWhite); //--- Set the text color
+   obj_Btn_CLOSEALLSELL2.Color(clrRed); //--- Set the text color
    obj_Btn_CLOSEALLSELL2.Font("Calibri bold"); //--- Set the font style
    obj_Btn_CLOSEALLSELL2.FontSize(14); //--- Set the font size
 
@@ -981,7 +982,7 @@ void createSection_Trade() {
    obj_Btn_CLOSEALLBUY2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEALLBUY2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLBUY2.Text("CLOSE ALL BUY"); //--- Set the button text
-   obj_Btn_CLOSEALLBUY2.Color(clrYellow); //--- Set the text color
+   obj_Btn_CLOSEALLBUY2.Color(clrRed); //--- Set the text color
    obj_Btn_CLOSEALLBUY2.Font("Calibri bold"); //--- Set the font style
    obj_Btn_CLOSEALLBUY2.FontSize(14); //--- Set the font size
    
