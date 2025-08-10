@@ -584,8 +584,8 @@ void OnChartEvent(
             }
          }
       }
-      
-      else if ( sparam==obj_Btn_TP_SL_UPDATE2.Name() ) { 
+
+      else if ( sparam==obj_Btn_TP_SL_UPDATE2.Name() ) {
          Print("OBJECT CLICKED = ",obj_Btn_TP_SL_UPDATE2.Name());
          UpdateTpSl();
       }
@@ -994,10 +994,16 @@ void createSection_Trade() {
 
 
 
+   // TODO: RANDOM BACKGROUND COLOR
+   // clrDarkBlue
+   //
+   color c_ = GetRandomColor();
+
    obj_Btn_TP_SL_UPDATE2.Create(0,Btn_TP_SL_UPDATE2,0,x_,y_+(30*5)+25+3+50+50+50,0,0); //--- Create the buy stop button
    obj_Btn_TP_SL_UPDATE2.Size(140+140+10,25*2-3-3); //--- Set the button size
-   obj_Btn_TP_SL_UPDATE2.ColorBackground(clrDarkViolet); //--- Set the background color
-   obj_Btn_TP_SL_UPDATE2.ColorBorder(clrAqua); //--- Set the border color
+   // clrLimeGreen
+   obj_Btn_TP_SL_UPDATE2.ColorBackground(c_); //--- Set the background color
+   obj_Btn_TP_SL_UPDATE2.ColorBorder(c_); //--- Set the border color
    obj_Btn_TP_SL_UPDATE2.Text( "|---TP/SL UPDATE---|"); //--- Set the button text
    // obj_Btn_TP_SL_UPDATE2.Text( CharToString(165) + " TP/SL UPDATE" ); // + "|---TP/SL UPDATE---|"); //--- Set the button text
    obj_Btn_TP_SL_UPDATE2.Color(clrWhite); //--- Set the text color
@@ -1355,35 +1361,35 @@ void UpdateTpSl() {
          if (PositionSelectByTicket(ticket)) {
             string symbol = PositionGetString(POSITION_SYMBOL);
             // if (symbol == _Symbol) {
-            
-               // double sl_price = PositionGetDouble(POSITION_SL);
-               long position_type = PositionGetInteger(POSITION_TYPE);
-               // double entry_price = PositionGetDouble(POSITION_PRICE_OPEN);
-               // double position_profit = PositionGetDouble(POSITION_PROFIT);
-               //double ask_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ ASK), _Digits);
-               //double bid_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ BID), _Digits);
-               // long position_time_update = PositionGetInteger(POSITION_TIME_UPDATE);
-               // double spread_ = MathAbs(ask_ - bid_);
-               
-               if (position_type == POSITION_TYPE_BUY) {
-                  double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-                  double range_ = GetTpSlRange(symbol);                  
-                  double stop_loss_price = current_price_ - range_;
-                  double tp_price = current_price_ + range_;
-                  
-                  PrintFormat("current: %f range: %f", current_price_, range_ );
-                  
-                  obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
-               } else if (position_type == POSITION_TYPE_SELL) {
-                  double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-                  double range_ = GetTpSlRange(symbol);                  
-                  double stop_loss_price = current_price_ + range_;
-                  double tp_price = current_price_ - range_;
-                  
-                  PrintFormat("current: %f range: %f", current_price_, range_ );
-                  
-                  obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
-               }
+
+            // double sl_price = PositionGetDouble(POSITION_SL);
+            long position_type = PositionGetInteger(POSITION_TYPE);
+            // double entry_price = PositionGetDouble(POSITION_PRICE_OPEN);
+            // double position_profit = PositionGetDouble(POSITION_PROFIT);
+            //double ask_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ ASK), _Digits);
+            //double bid_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ BID), _Digits);
+            // long position_time_update = PositionGetInteger(POSITION_TIME_UPDATE);
+            // double spread_ = MathAbs(ask_ - bid_);
+
+            if (position_type == POSITION_TYPE_BUY) {
+               double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+               double range_ = GetTpSlRange(symbol);
+               double stop_loss_price = current_price_ - range_;
+               double tp_price = current_price_ + range_;
+
+               PrintFormat("current: %f range: %f", current_price_, range_ );
+
+               obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
+            } else if (position_type == POSITION_TYPE_SELL) {
+               double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+               double range_ = GetTpSlRange(symbol);
+               double stop_loss_price = current_price_ + range_;
+               double tp_price = current_price_ - range_;
+
+               PrintFormat("current: %f range: %f", current_price_, range_ );
+
+               obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
+            }
 
             //}
          }
@@ -1394,7 +1400,7 @@ void UpdateTpSl() {
 //+------------------------------------------------------------------+
 // get tp/sl by symbol
 double GetTpSlRange(string symbol_ = "GOLD#") {
-   
+
    // timeframe M30 ?
    double tp_sl_point_default = 500 * 0.01;
    string sym_ = symbol_; // _Symbol;
@@ -1406,7 +1412,59 @@ double GetTpSlRange(string symbol_ = "GOLD#") {
       // = ?
       tp_sl_point_default = 1000 * 0.01;
    }
-   
+
    return tp_sl_point_default;
-   
+
 }
+
+// TODO: RAMDOM COLOR
+// clrDarkBlue
+// clrMidnightBlue
+// clrMaroon
+// clrIndigo
+// clrSeaGreen
+// clrNavy
+// clrOlive
+// clrTeal
+// clrPurple
+// clrBlueViolet
+//clrDimGray
+//clrOliveDrab
+//clrSienna
+//clrDarkOliveGreen
+//clrSaddleBrown
+color GetRandomColor() {
+
+   color cs[15] = { clrDarkBlue,
+                    clrMidnightBlue,
+                    clrMaroon,
+                    clrIndigo,
+                    clrSeaGreen,
+                    
+                    clrNavy,
+                    clrOlive,
+                    clrTeal,
+                    clrPurple,
+                    clrBlueViolet,
+                    
+                    clrDimGray,
+                    clrOliveDrab,
+                    clrSienna,
+                    clrDarkOliveGreen,
+                    clrSaddleBrown
+                  };
+                  
+   int ran_ = MathRandInt(0, 14);
+   return cs[ ran_  ];
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+int MathRandInt(const int min, const int max) {
+   double f   = (MathRand() / 32768.0);
+   
+   return min + (int)(f * (max - min));
+}
+
+//+------------------------------------------------------------------+
