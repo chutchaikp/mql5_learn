@@ -3,9 +3,15 @@
 //|                           Copyright 2024, Allan Munene Mutiiria. |
 //|                                     https://forexalgo-trader.com |
 //+------------------------------------------------------------------+
+
+// TODO: 
+// ADD CLOSE ALL BUTTON AT TRADE TAB
+// MOVE CLOSE 1/2 TO THE BOTTOM
+
+
 #property copyright "Copyright 2024, Allan Munene Mutiiria." //--- Set copyright information
 #property link      "https://forexalgo-trader.com"            //--- Link to the author's website
-#property version   "2.10"                                    //--- Version of the script
+#property version   "2.16"                                    //--- Version of the script
 
 #include <Trade/Trade.mqh>                                     //--- Include trade library
 CTrade obj_Trade;                                            //--- Create an instance of the CTrade class
@@ -24,6 +30,10 @@ CButton obj_Btn_ENTRY;                                      //--- Entry button o
 CButton obj_Btn_BUY;                                        //--- Buy button object
 CButton obj_Btn_SELLSTOP;                                   //--- Sell Stop button object
 CButton obj_Btn_BUYSTOP;                                    //--- Buy Stop button object
+
+CButton obj_Btn_CLOSEHALF2;
+CButton obj_Btn_CLOSEALL2;
+
 CButton obj_Btn_SELLLIMIT;                                  //--- Sell Limit button object
 CButton obj_Btn_BUYLIMIT;                                   //--- Buy Limit button object
 CButton obj_Btn_FOOTER;                                     //--- Footer button object
@@ -86,6 +96,10 @@ CLabel obj_Lbl_TP;                                          //--- Take Profit la
 #define Btn_BUY "Btn_BUY"                                    //--- Button name for the buy button
 #define Btn_SELLSTOP "Btn_SELLSTOP"                          //--- Button name for the sell stop button
 #define Btn_BUYSTOP "Btn_BUYSTOP"                            //--- Button name for the buy stop button
+
+#define Btn_CLOSEHALF2 "Btn_CLOSEHALF2"
+#define Btn_CLOSEALL2 "Btn_CLOSEALL2"
+
 #define Btn_SELLLIMIT "Btn_SELLLIMIT"                        //--- Button name for the sell limit button
 #define Btn_BUYLIMIT "Btn_BUYLIMIT"                          //--- Button name for the buy limit button
 #define Btn_FOOTER "Btn_FOOTER"                              //--- Button name for the footer button
@@ -145,7 +159,8 @@ int OnInit() {
    obj_Btn_MAIN.Create(0, Btn_MAIN, 0, 30, 30, 0, 0); //--- Create the main button at specified coordinates
    //obj_Btn_MAIN.Width(310); //--- (Commented out) Set width of the main button
    //obj_Btn_MAIN.Height(300); //--- (Commented out) Set height of the main button
-   obj_Btn_MAIN.Size(310, 300); //--- Set size of the main button
+   //obj_Btn_MAIN.Size(310, 300); //--- Set size of the main button
+   obj_Btn_MAIN.Size(310, 350); //--- Set size of the main button
    obj_Btn_MAIN.ColorBackground(C'070,070,070'); //--- Set background color of the main button
    obj_Btn_MAIN.ColorBorder(clrBlack); //--- Set border color of the main button
 
@@ -547,25 +562,16 @@ void OnChartEvent(
 
 // CLOSE HALF - obj_Btn_ENTRY
 // obj_Trade
-      else if (sparam==obj_Btn_ENTRY.Name()) {
+      else if (sparam==obj_Btn_ENTRY.Name() || sparam==obj_Btn_CLOSEHALF2.Name()) {
          Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
-         for (int i = PositionsTotal() -1; i >= 0; i--) { //--- Loop through all positions
-            ulong pos_ticket = PositionGetTicket(i); //--- Get the ticket of the position
-            
-            if (pos_ticket > 0) { //--- Check if the position ticket is valid
-               if (PositionSelectByTicket(pos_ticket)) { //--- Select the position by ticket
-                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) { //--- Check if the position matches the symbol
-                     
-                     double volume_ = PositionGetDouble(POSITION_VOLUME);
-                     
-                     // TODO: VOLUME ISSUE ? IF NOT EVENT NUMBER ?
-                     // % 
-                     // 100.1 US500Cash issue ?
-                     
+         for (int i = PositionsTotal() -1; i >= 0; i--) { 
+            ulong pos_ticket = PositionGetTicket(i);             
+            if (pos_ticket > 0) { 
+               if (PositionSelectByTicket(pos_ticket)) { 
+                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) {                      
+                     double volume_ = PositionGetDouble(POSITION_VOLUME);                     
                      double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
-                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                   
-                     
-                     // obj_Trade.PositionClose(pos_ticket, //--- Close the position
+                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                     
                   }
                }
             }
@@ -575,7 +581,7 @@ void OnChartEvent(
 
 
 
-      else if (sparam==obj_Btn_CLOSE_ALL.Name()) { //--- Check if the Close All button is clicked
+      else if (sparam==obj_Btn_CLOSE_ALL.Name() || sparam==obj_Btn_CLOSEALL2.Name() ) { //--- Check if the Close All button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_CLOSE_ALL.Name()); //--- Log the button click event
 
          for (int i = PositionsTotal() -1; i >= 0; i--) { //--- Loop through all positions
@@ -888,9 +894,9 @@ void createSection_Trade() {
    obj_Btn_ENTRY.ColorBorder(clrGoldenrod); //--- Set the border color
    // obj_Btn_ENTRY.Text("Entry"); //--- Set the button text 
    // obj_Btn_ENTRY.Text(ShortToString(0x23F0)); //--- Set the button text 
-   // obj_Btn_ENTRY.Text(  CharToString(255) );
-   obj_Btn_ENTRY.Text(  "1/2" );
-   // obj_Btn_ENTRY.Font("Wingdings");
+   obj_Btn_ENTRY.Text(  CharToString(255) );
+   // obj_Btn_ENTRY.Text(  "1/2" );
+   obj_Btn_ENTRY.Font("Wingdings");
    obj_Btn_ENTRY.Color(clrBlack); //--- Set the text color
    // obj_Btn_ENTRY.Font("Calibri bold"); //--- Set the font style
    obj_Btn_ENTRY.FontSize(25); //--- Set the font size
@@ -928,6 +934,31 @@ void createSection_Trade() {
    obj_Btn_BUYSTOP.Color(clrWhite); //--- Set the text color
    obj_Btn_BUYSTOP.Font("Calibri bold"); //--- Set the font style
    obj_Btn_BUYSTOP.FontSize(14); //--- Set the font size
+   
+   
+   
+   //|------------ CLOSE 2 --------------|
+   //--- CLOSE HALF BUTTON 2
+   obj_Btn_CLOSEHALF2.Create(0,Btn_CLOSEHALF2,0,x_,y_+(30*5)+25+3+50,0,0); //--- Create the sell stop button
+   obj_Btn_CLOSEHALF2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEHALF2.ColorBackground(clrBlack); //--- Set the background color
+   obj_Btn_CLOSEHALF2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEHALF2.Text("CLOSE 1/2"); //--- Set the button text
+   obj_Btn_CLOSEHALF2.Color(clrWhite); //--- Set the text color
+   obj_Btn_CLOSEHALF2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEHALF2.FontSize(14); //--- Set the font size
+
+   //--- CLOSE ALL BUTTON 2
+   obj_Btn_CLOSEALL2.Create(0,Btn_CLOSEALL2,0,40+190-40,y_+(30*5)+25+3+50,0,0); //--- Create the buy stop button
+   obj_Btn_CLOSEALL2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALL2.ColorBackground(clrBlack); //--- Set the background color
+   obj_Btn_CLOSEALL2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALL2.Text("CLOSE ALL"); //--- Set the button text
+   obj_Btn_CLOSEALL2.Color(clrYellow); //--- Set the text color
+   obj_Btn_CLOSEALL2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALL2.FontSize(14); //--- Set the font size
+   //|-----------------------------|
+   
 
 //   //--- SELL LIMIT BUTTON
 //   obj_Btn_SELLLIMIT.Create(0,Btn_SELLLIMIT,0,40,270,0,0); //--- Create the sell limit button
@@ -1224,6 +1255,9 @@ void destroySection_Trade() {
    obj_Btn_BUYSTOP.Destroy(); //--- Destroy the buy stop button
    obj_Btn_SELLLIMIT.Destroy(); //--- Destroy the sell limit button
    obj_Btn_BUYLIMIT.Destroy(); //--- Destroy the buy limit button
+   
+   obj_Btn_CLOSEHALF2.Destroy();
+   obj_Btn_CLOSEALL2.Destroy();
 }
 
 //--- Function to destroy close section objects
