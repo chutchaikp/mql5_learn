@@ -33,6 +33,8 @@ CButton obj_Btn_BUYSTOP;                                    //--- Buy Stop butto
 
 CButton obj_Btn_CLOSEHALF2;
 CButton obj_Btn_CLOSEALL2;
+CButton obj_Btn_CLOSEALLSELL2;
+CButton obj_Btn_CLOSEALLBUY2;
 
 CButton obj_Btn_SELLLIMIT;                                  //--- Sell Limit button object
 CButton obj_Btn_BUYLIMIT;                                   //--- Buy Limit button object
@@ -99,6 +101,8 @@ CLabel obj_Lbl_TP;                                          //--- Take Profit la
 
 #define Btn_CLOSEHALF2 "Btn_CLOSEHALF2"
 #define Btn_CLOSEALL2 "Btn_CLOSEALL2"
+#define Btn_CLOSEALLSELL2 "Btn_CLOSEALLSELL"
+#define Btn_CLOSEALLBUY2 "Btn_CLOSEALLBUY2"
 
 #define Btn_SELLLIMIT "Btn_SELLLIMIT"                        //--- Button name for the sell limit button
 #define Btn_BUYLIMIT "Btn_BUYLIMIT"                          //--- Button name for the buy limit button
@@ -160,7 +164,7 @@ int OnInit() {
    //obj_Btn_MAIN.Width(310); //--- (Commented out) Set width of the main button
    //obj_Btn_MAIN.Height(300); //--- (Commented out) Set height of the main button
    //obj_Btn_MAIN.Size(310, 300); //--- Set size of the main button
-   obj_Btn_MAIN.Size(310, 350); //--- Set size of the main button
+   obj_Btn_MAIN.Size(310, 400); //--- Set size of the main button
    obj_Btn_MAIN.ColorBackground(C'070,070,070'); //--- Set background color of the main button
    obj_Btn_MAIN.ColorBorder(clrBlack); //--- Set border color of the main button
 
@@ -594,7 +598,7 @@ void OnChartEvent(
                }
             }
          }
-      } else if (sparam==obj_Btn_CLOSE_ALL_SELL.Name()) { //--- Check if the Close All Sell button is clicked
+      } else if (sparam==obj_Btn_CLOSE_ALL_SELL.Name() || sparam==obj_Btn_CLOSEALLSELL2.Name() ) { //--- Check if the Close All Sell button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_CLOSE_ALL_SELL.Name()); //--- Log the button click event
 
          for (int i = PositionsTotal() -1; i >= 0; i--) { //--- Loop through all positions
@@ -610,7 +614,7 @@ void OnChartEvent(
                }
             }
          }
-      } else if (sparam==obj_Btn_CLOSE_ALL_BUY.Name()) { //--- Check if the Close All Buy button is clicked
+      } else if (sparam==obj_Btn_CLOSE_ALL_BUY.Name() || sparam==obj_Btn_CLOSEALLBUY2.Name() ) { //--- Check if the Close All Buy button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_CLOSE_ALL_BUY.Name()); //--- Log the button click event
 
          for (int i = PositionsTotal() -1; i >= 0; i--) { //--- Loop through all positions
@@ -957,6 +961,30 @@ void createSection_Trade() {
    obj_Btn_CLOSEALL2.Color(clrYellow); //--- Set the text color
    obj_Btn_CLOSEALL2.Font("Calibri bold"); //--- Set the font style
    obj_Btn_CLOSEALL2.FontSize(14); //--- Set the font size
+   
+   
+   
+   
+      //--- CLOSE ALL SELL BUTTON 2
+   obj_Btn_CLOSEALLSELL2.Create(0,Btn_CLOSEALLSELL2,0,x_,y_+(30*5)+25+3+50+50,0,0); //--- Create the sell stop button
+   obj_Btn_CLOSEALLSELL2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALLSELL2.ColorBackground(clrBlack); //--- Set the background color
+   obj_Btn_CLOSEALLSELL2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALLSELL2.Text("CLOSE ALL SELL"); //--- Set the button text
+   obj_Btn_CLOSEALLSELL2.Color(clrWhite); //--- Set the text color
+   obj_Btn_CLOSEALLSELL2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALLSELL2.FontSize(14); //--- Set the font size
+
+   //--- CLOSE ALL BUY BUTTON 2
+   obj_Btn_CLOSEALLBUY2.Create(0,Btn_CLOSEALLBUY2,0,40+190-40,y_+(30*5)+25+3+50+50,0,0); //--- Create the buy stop button
+   obj_Btn_CLOSEALLBUY2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALLBUY2.ColorBackground(clrBlack); //--- Set the background color
+   obj_Btn_CLOSEALLBUY2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALLBUY2.Text("CLOSE ALL BUY"); //--- Set the button text
+   obj_Btn_CLOSEALLBUY2.Color(clrYellow); //--- Set the text color
+   obj_Btn_CLOSEALLBUY2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALLBUY2.FontSize(14); //--- Set the font size
+   
    //|-----------------------------|
    
 
@@ -1258,6 +1286,9 @@ void destroySection_Trade() {
    
    obj_Btn_CLOSEHALF2.Destroy();
    obj_Btn_CLOSEALL2.Destroy();
+   obj_Btn_CLOSEALLSELL2.Destroy();
+   obj_Btn_CLOSEALLBUY2.Destroy();
+   
 }
 
 //--- Function to destroy close section objects
