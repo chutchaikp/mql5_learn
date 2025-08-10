@@ -4,7 +4,7 @@
 //|                                     https://forexalgo-trader.com |
 //+------------------------------------------------------------------+
 
-// TODO: 
+// TODO:
 // ADD CLOSE ALL BUTTON AT TRADE TAB
 // MOVE CLOSE 1/2 TO THE BOTTOM
 
@@ -35,6 +35,7 @@ CButton obj_Btn_CLOSEHALF2;
 CButton obj_Btn_CLOSEALL2;
 CButton obj_Btn_CLOSEALLSELL2;
 CButton obj_Btn_CLOSEALLBUY2;
+CButton obj_Btn_TP_SL_UPDATE2;
 
 CButton obj_Btn_SELLLIMIT;                                  //--- Sell Limit button object
 CButton obj_Btn_BUYLIMIT;                                   //--- Buy Limit button object
@@ -103,6 +104,7 @@ CLabel obj_Lbl_TP;                                          //--- Take Profit la
 #define Btn_CLOSEALL2 "Btn_CLOSEALL2"
 #define Btn_CLOSEALLSELL2 "Btn_CLOSEALLSELL"
 #define Btn_CLOSEALLBUY2 "Btn_CLOSEALLBUY2"
+#define Btn_TP_SL_UPDATE2 "Btn_TP_SL_UPDATE2"
 
 #define Btn_SELLLIMIT "Btn_SELLLIMIT"                        //--- Button name for the sell limit button
 #define Btn_BUYLIMIT "Btn_BUYLIMIT"                          //--- Button name for the buy limit button
@@ -164,7 +166,7 @@ int OnInit() {
    //obj_Btn_MAIN.Width(310); //--- (Commented out) Set width of the main button
    //obj_Btn_MAIN.Height(300); //--- (Commented out) Set height of the main button
    //obj_Btn_MAIN.Size(310, 300); //--- Set size of the main button
-   obj_Btn_MAIN.Size(310, 400); //--- Set size of the main button
+   obj_Btn_MAIN.Size(310, 450); //--- Set size of the main button
    obj_Btn_MAIN.ColorBackground(C'070,070,070'); //--- Set background color of the main button
    obj_Btn_MAIN.ColorBorder(clrBlack); //--- Set border color of the main button
 
@@ -297,7 +299,7 @@ void OnChartEvent(
 ) {
    // Print the 4 function parameters
    //Print("ID = ",id,", LPARAM = ",lparam,", DPARAM = ",dparam,", SPARAM = ",sparam);
-   
+
    // timeframe M30
    double tp_sl_point_default = 500;
    string sym_ = _Symbol;
@@ -424,7 +426,7 @@ void OnChartEvent(
 //
 //         // Call a function to destroy the main panel itself
 //         destroySection_Main_Panel();
-//      } 
+//      }
       else if (sparam==obj_Btn_SELL.Name()) { //--- Check if the Sell button is clicked
          Print("OBJECT CLICKED = ",obj_Btn_SELL.Name()); //--- Log the button click event
 
@@ -434,11 +436,11 @@ void OnChartEvent(
          double lots = StringToDouble(obj_Edit_LOTS.Text()); //--- Get the lot size from input field
          double entry_price = Bid; //--- Set the entry price for selling to the current bid price
          // double stopLoss = obj_Edit_SL.Text()=="0" ?  : Ask+StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
-         
-         //double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(500*_Point) : StringToDouble(obj_Edit_SL.Text()) ; 
+
+         //double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(500*_Point) : StringToDouble(obj_Edit_SL.Text()) ;
          //double takeprofit = obj_Edit_TP.Text()=="0" ? Ask-(500*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
-         
-         double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()) ; 
+
+         double stopLoss = obj_Edit_SL.Text()=="0" ? Ask+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()) ;
          double takeprofit = obj_Edit_TP.Text()=="0" ? Ask-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
          Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
@@ -453,21 +455,21 @@ void OnChartEvent(
          double entry_price = Ask; //--- Set the entry price for buying to the current ask price
          //double stopLoss = Bid-StringToDouble(obj_Edit_SL.Text())*_Point; //--- Calculate stop loss based on user input
          //double takeprofit = Bid+StringToDouble(obj_Edit_TP.Text())*_Point; //--- Calculate take profit based on user input
-         
-         // TODO: 
+
+         // TODO:
          // - if BTCUSD set default sl/tp = 1000
          // - if XAUUSD set default sl/tp = 1000
          // ?
-         
+
          double stopLoss = obj_Edit_SL.Text()=="0" ? Bid-(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_SL.Text()); //--- Calculate stop loss based on user input
          double takeprofit = obj_Edit_TP.Text()=="0" ? Bid+(tp_sl_point_default*_Point) : StringToDouble(obj_Edit_TP.Text()); //--- Calculate take profit based on user input
 
          Print("Lots = ",lots,", Entry = ",entry_price,", SL = ",stopLoss,", TP = ",takeprofit); //--- Log order details
          obj_Trade.Buy(lots,_Symbol,entry_price,stopLoss,takeprofit); //--- Execute the buy order
       } else if (sparam==obj_Btn_SELLSTOP.Name()) { //--- Check if the Sell Stop button is clicked
-      
-         //|-----------SELLSTOP----------| 
-         
+
+         //|-----------SELLSTOP----------|
+
          Print("OBJECT CLICKED = ",obj_Btn_SELLSTOP.Name()); //--- Log the button click event
 
          double Ask = NormalizeDouble(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits); //--- Get and normalize the ask price
@@ -491,9 +493,9 @@ void OnChartEvent(
             obj_Trade.SellStop(lots,entry_price,_Symbol,stopLoss,takeprofit); //--- Execute the sell stop order
          }
       } else if (sparam==obj_Btn_BUYSTOP.Name()) { //--- Check if the Buy Stop button is clicked
-      
-         //|-----------BUYSTOP----------| 
-      
+
+         //|-----------BUYSTOP----------|
+
          Print("OBJECT CLICKED = ",obj_Btn_BUYSTOP.Name()); //--- Log the button click event
 
          double Ask = NormalizeDouble(SymbolInfoDouble(_Symbol,SYMBOL_ASK),_Digits); //--- Get and normalize the ask price
@@ -567,22 +569,26 @@ void OnChartEvent(
 
 // CLOSE HALF - obj_Btn_ENTRY
 // obj_Trade
-//      else if (sparam==obj_Btn_ENTRY.Name() || sparam==obj_Btn_CLOSEHALF2.Name()) {
-//         Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
-//         for (int i = PositionsTotal() -1; i >= 0; i--) { 
-//            ulong pos_ticket = PositionGetTicket(i);             
-//            if (pos_ticket > 0) { 
-//               if (PositionSelectByTicket(pos_ticket)) { 
-//                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) {                      
-//                     double volume_ = PositionGetDouble(POSITION_VOLUME);                     
-//                     double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
-//                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);                     
-//                  }
-//               }
-//            }
-//         }
-//         
-//      }
+      else if (sparam==obj_Btn_ENTRY.Name() || sparam==obj_Btn_CLOSEHALF2.Name()) {
+         Print("OBJECT CLICKED = ",obj_Btn_ENTRY.Name());
+         for (int i = PositionsTotal() -1; i >= 0; i--) {
+            ulong pos_ticket = PositionGetTicket(i);
+            if (pos_ticket > 0) {
+               if (PositionSelectByTicket(pos_ticket)) {
+                  if (PositionGetString(POSITION_SYMBOL)==_Symbol) {
+                     double volume_ = PositionGetDouble(POSITION_VOLUME);
+                     double normalize_volume_ = NormalizeDouble(volume_/2, _Digits);
+                     obj_Trade.PositionClosePartial(pos_ticket, normalize_volume_);
+                  }
+               }
+            }
+         }
+      }
+      
+      else if ( sparam==obj_Btn_TP_SL_UPDATE2.Name() ) { 
+         Print("OBJECT CLICKED = ",obj_Btn_TP_SL_UPDATE2.Name());
+         UpdateTpSl();
+      }
 
 
 
@@ -775,9 +781,9 @@ void createSection_Trade() {
    // y +30 each line
    int y_ = 100;
    int x_ = 40;
-   // int button_ = 
+   // int button_ =
    // x ...
-   
+
 //   //--- RISK BUTTON
 //   obj_Btn_RISK.Create(0,Btn_RISK,0,40,100,0,0); //--- Create the risk button
 //   obj_Btn_RISK.Size(210,25); //--- Set the button size
@@ -797,7 +803,7 @@ void createSection_Trade() {
 //   obj_Edit_RISK.Color(clrBlack); //--- Set the text color
 //   obj_Edit_RISK.Font("Times new roman bold"); //--- Set the font style
 //   obj_Edit_RISK.FontSize(15); //--- Set the font size
-  
+
    //--- LOTS LABEL
    obj_Lbl_LOTS.Create(0,Lbl_LOTS,0,x_,y_,0,0); //--- Create the lot size label
    obj_Lbl_LOTS.Text("Lot size"); //--- Set the label text
@@ -814,14 +820,14 @@ void createSection_Trade() {
    obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
    obj_Edit_LOTS.Font("Times new roman bold"); //--- Set the font style
    obj_Edit_LOTS.FontSize(15); //--- Set the font size
-   
+
    //--- PRICE LABEL
    obj_Lbl_PRICE.Create(0,Lbl_PRICE,0,x_,y_+30,0,0); //--- Create the price label
    obj_Lbl_PRICE.Text("Entry price"); //--- Set the label text
    obj_Lbl_PRICE.Color(clrWhite); //--- Set the text color
    obj_Lbl_PRICE.Font("Arial black"); //--- Set the font style
    obj_Lbl_PRICE.FontSize(13); //--- Set the font size
-   
+
    //--- PRICE EDIT
    obj_Edit_PRICE.Create(0,Edit_PRICE,0,x_+145,y_+30,0,0); //--- Create the price edit field
    obj_Edit_PRICE.Size(145,25); //--- Set the edit field size
@@ -897,8 +903,8 @@ void createSection_Trade() {
    obj_Btn_ENTRY.Size(70,25*2-3); //--- Set the button size
    obj_Btn_ENTRY.ColorBackground(clrGoldenrod); //--- Set the background color
    obj_Btn_ENTRY.ColorBorder(clrGoldenrod); //--- Set the border color
-   // obj_Btn_ENTRY.Text("Entry"); //--- Set the button text 
-   // obj_Btn_ENTRY.Text(ShortToString(0x23F0)); //--- Set the button text 
+   // obj_Btn_ENTRY.Text("Entry"); //--- Set the button text
+   // obj_Btn_ENTRY.Text(ShortToString(0x23F0)); //--- Set the button text
    obj_Btn_ENTRY.Text(  CharToString(255) );
    // obj_Btn_ENTRY.Text(  "1/2" );
    obj_Btn_ENTRY.Font("Wingdings");
@@ -939,55 +945,67 @@ void createSection_Trade() {
    obj_Btn_BUYSTOP.Color(clrWhite); //--- Set the text color
    obj_Btn_BUYSTOP.Font("Calibri bold"); //--- Set the font style
    obj_Btn_BUYSTOP.FontSize(14); //--- Set the font size
-   
-   
-   
+
+
+
    //|------------ CLOSE 2 --------------|
    //--- CLOSE HALF BUTTON 2
    obj_Btn_CLOSEHALF2.Create(0,Btn_CLOSEHALF2,0,x_,y_+(30*5)+25+3+50,0,0); //--- Create the sell stop button
-   obj_Btn_CLOSEHALF2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEHALF2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEHALF2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEHALF2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEHALF2.Text("CLOSE 1/2"); //--- Set the button text
    obj_Btn_CLOSEHALF2.Color(clrWhite); //--- Set the text color
-   obj_Btn_CLOSEHALF2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEHALF2.Font("Calibri"); //--- Set the font style
    obj_Btn_CLOSEHALF2.FontSize(14); //--- Set the font size
 
    //--- CLOSE ALL BUTTON 2
    obj_Btn_CLOSEALL2.Create(0,Btn_CLOSEALL2,0,40+190-40,y_+(30*5)+25+3+50,0,0); //--- Create the buy stop button
-   obj_Btn_CLOSEALL2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALL2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALL2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEALL2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEALL2.Text("CLOSE ALL"); //--- Set the button text
    obj_Btn_CLOSEALL2.Color(clrYellow); //--- Set the text color
-   obj_Btn_CLOSEALL2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALL2.Font("Calibri"); //--- Set the font style
    obj_Btn_CLOSEALL2.FontSize(14); //--- Set the font size
-   
-   
-   
-   
-      //--- CLOSE ALL SELL BUTTON 2
+
+
+
+
+   //--- CLOSE ALL SELL BUTTON 2
    obj_Btn_CLOSEALLSELL2.Create(0,Btn_CLOSEALLSELL2,0,x_,y_+(30*5)+25+3+50+50,0,0); //--- Create the sell stop button
-   obj_Btn_CLOSEALLSELL2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALLSELL2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALLSELL2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEALLSELL2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLSELL2.Text("CLOSE ALL SELL"); //--- Set the button text
    obj_Btn_CLOSEALLSELL2.Color(clrRed); //--- Set the text color
-   obj_Btn_CLOSEALLSELL2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALLSELL2.Font("Calibri"); //--- Set the font style
    obj_Btn_CLOSEALLSELL2.FontSize(14); //--- Set the font size
 
    //--- CLOSE ALL BUY BUTTON 2
    obj_Btn_CLOSEALLBUY2.Create(0,Btn_CLOSEALLBUY2,0,40+190-40,y_+(30*5)+25+3+50+50,0,0); //--- Create the buy stop button
-   obj_Btn_CLOSEALLBUY2.Size(140,25*2-3-3); //--- Set the button size   
+   obj_Btn_CLOSEALLBUY2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALLBUY2.ColorBackground(clrBlack); //--- Set the background color
    obj_Btn_CLOSEALLBUY2.ColorBorder(clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLBUY2.Text("CLOSE ALL BUY"); //--- Set the button text
    obj_Btn_CLOSEALLBUY2.Color(clrRed); //--- Set the text color
-   obj_Btn_CLOSEALLBUY2.Font("Calibri bold"); //--- Set the font style
+   obj_Btn_CLOSEALLBUY2.Font("Calibri"); //--- Set the font style
    obj_Btn_CLOSEALLBUY2.FontSize(14); //--- Set the font size
-   
+
+
+
+   obj_Btn_TP_SL_UPDATE2.Create(0,Btn_TP_SL_UPDATE2,0,x_,y_+(30*5)+25+3+50+50+50,0,0); //--- Create the buy stop button
+   obj_Btn_TP_SL_UPDATE2.Size(140+140+10,25*2-3-3); //--- Set the button size
+   obj_Btn_TP_SL_UPDATE2.ColorBackground(clrDarkViolet); //--- Set the background color
+   obj_Btn_TP_SL_UPDATE2.ColorBorder(clrAqua); //--- Set the border color
+   obj_Btn_TP_SL_UPDATE2.Text( "|---TP/SL UPDATE---|"); //--- Set the button text
+   // obj_Btn_TP_SL_UPDATE2.Text( CharToString(165) + " TP/SL UPDATE" ); // + "|---TP/SL UPDATE---|"); //--- Set the button text
+   obj_Btn_TP_SL_UPDATE2.Color(clrWhite); //--- Set the text color
+   obj_Btn_TP_SL_UPDATE2.Font("Calibri"); //--- Set the font style
+   obj_Btn_TP_SL_UPDATE2.FontSize(16); //--- Set the font size
+
    //|-----------------------------|
-   
+
 
 //   //--- SELL LIMIT BUTTON
 //   obj_Btn_SELLLIMIT.Create(0,Btn_SELLLIMIT,0,40,270,0,0); //--- Create the sell limit button
@@ -1284,12 +1302,13 @@ void destroySection_Trade() {
    obj_Btn_BUYSTOP.Destroy(); //--- Destroy the buy stop button
    obj_Btn_SELLLIMIT.Destroy(); //--- Destroy the sell limit button
    obj_Btn_BUYLIMIT.Destroy(); //--- Destroy the buy limit button
-   
+
    obj_Btn_CLOSEHALF2.Destroy();
    obj_Btn_CLOSEALL2.Destroy();
    obj_Btn_CLOSEALLSELL2.Destroy();
    obj_Btn_CLOSEALLBUY2.Destroy();
-   
+   obj_Btn_TP_SL_UPDATE2.Destroy();
+
 }
 
 //--- Function to destroy close section objects
@@ -1324,3 +1343,70 @@ void destroySection_Information() {
    // obj_Btn_TIME.Destroy(); //--- Destroy the server time button
 }
 //+------------------------------------------------------------------+
+
+
+// TP/SL UPDATE
+// BTCUSD +- 10000 points from current price
+// XAUUSD +- 500 points from current price
+void UpdateTpSl() {
+   if (PositionsTotal() > 0) {
+      for (int i = 0; i < PositionsTotal(); i++) {
+         ulong ticket = PositionGetTicket(i);
+         if (PositionSelectByTicket(ticket)) {
+            string symbol = PositionGetString(POSITION_SYMBOL);
+            // if (symbol == _Symbol) {
+            
+               // double sl_price = PositionGetDouble(POSITION_SL);
+               long position_type = PositionGetInteger(POSITION_TYPE);
+               // double entry_price = PositionGetDouble(POSITION_PRICE_OPEN);
+               // double position_profit = PositionGetDouble(POSITION_PROFIT);
+               //double ask_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ ASK), _Digits);
+               //double bid_ = NormalizeDouble(SymbolInfoDouble(_Symbol, SYMBOL_ BID), _Digits);
+               // long position_time_update = PositionGetInteger(POSITION_TIME_UPDATE);
+               // double spread_ = MathAbs(ask_ - bid_);
+               
+               if (position_type == POSITION_TYPE_BUY) {
+                  double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+                  double range_ = GetTpSlRange(symbol);                  
+                  double stop_loss_price = current_price_ - range_;
+                  double tp_price = current_price_ + range_;
+                  
+                  PrintFormat("current: %f range: %f", current_price_, range_ );
+                  
+                  obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
+               } else if (position_type == POSITION_TYPE_SELL) {
+                  double current_price_ = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+                  double range_ = GetTpSlRange(symbol);                  
+                  double stop_loss_price = current_price_ + range_;
+                  double tp_price = current_price_ - range_;
+                  
+                  PrintFormat("current: %f range: %f", current_price_, range_ );
+                  
+                  obj_Trade.PositionModify(ticket, NormalizeDouble(stop_loss_price, _Digits), NormalizeDouble(tp_price, _Digits));
+               }
+
+            //}
+         }
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
+// get tp/sl by symbol
+double GetTpSlRange(string symbol_ = "GOLD#") {
+   
+   // timeframe M30 ?
+   double tp_sl_point_default = 500 * 0.01;
+   string sym_ = symbol_; // _Symbol;
+   if (sym_ == "GOLD#") {
+      tp_sl_point_default = 500 * 0.01;
+   } else if (sym_ == "BTCUSD#") {
+      tp_sl_point_default = 20000 * 0.01;
+   } else if (sym_ == "US500Cash" ) {
+      // = ?
+      tp_sl_point_default = 1000 * 0.01;
+   }
+   
+   return tp_sl_point_default;
+   
+}
