@@ -160,6 +160,8 @@ CLabel obj_Lbl_TP;                                          //--- Take Profit la
 //+------------------------------------------------------------------+
 int OnInit() {
    //--- Start of the initialization function
+   bool is_dark__ = false;
+   color c__ = GetRandomColor(is_dark__);
 
    //--- MAIN BUTTON
    obj_Btn_MAIN.Create(0, Btn_MAIN, 0, 30, 30, 0, 0); //--- Create the main button at specified coordinates
@@ -174,7 +176,7 @@ int OnInit() {
    obj_Btn_HEADER.Create(0, Btn_HEADER, 0, 30, 30, 0, 0); //--- Create the header button at specified coordinates
    obj_Btn_HEADER.Size(310, 25); //--- Set size of the header button
    // obj_Btn_HEADER.ColorBackground(clrLightBlue); //--- Set background color of the header button
-   obj_Btn_HEADER.ColorBackground(clrLightBlue); //--- Set background color of the header button
+   obj_Btn_HEADER.ColorBackground(c__); //clrLightBlue); //--- Set background color of the header button
    obj_Btn_HEADER.ColorBorder(clrBlack); //--- Set border color of the header button
 
    ////--- X BUTTON
@@ -816,8 +818,8 @@ void createSection_Trade() {
 
 
 
-bool is_dark__ = false;
-color c__ = GetRandomColor(is_dark__);
+   bool is_dark__ = false;
+   color c__ = GetRandomColor(is_dark__);
 
    //--- LOTS EDIT
    obj_Edit_LOTS.Create(0,Edit_LOTS,0,x_+145,y_,0,0); //--- Create the lot size edit field
@@ -909,11 +911,13 @@ color c__ = GetRandomColor(is_dark__);
 
 // TODO: CLOSE HALF
 
+
+
    //--- ENTRY BUTTON
    obj_Btn_ENTRY.Create(0,Btn_ENTRY,0,150,y_+(30*4)+3,0,0); //--- Create the entry button
    obj_Btn_ENTRY.Size(70,25*2-3); //--- Set the button size
-   obj_Btn_ENTRY.ColorBackground(clrGoldenrod); //--- Set the background color
-   obj_Btn_ENTRY.ColorBorder(clrGoldenrod); //--- Set the border color
+   obj_Btn_ENTRY.ColorBackground(c__); // clrGoldenrod); //--- Set the background color
+   obj_Btn_ENTRY.ColorBorder(c__); // clrGoldenrod); //--- Set the border color
    // obj_Btn_ENTRY.Text("Entry"); //--- Set the button text
    // obj_Btn_ENTRY.Text(ShortToString(0x23F0)); //--- Set the button text
    obj_Btn_ENTRY.Text(  CharToString(255) );
@@ -1007,7 +1011,20 @@ color c__ = GetRandomColor(is_dark__);
 
    // TODO: RANDOM BACKGROUND COLOR
    // clrDarkBlue
-   
+   //string fonts[] =
+   //{
+   //   "Comic Sans MS",
+   //   "Consolas",
+   //   "Courier New",
+   //   "Lucida Console",
+   //   "Microsoft Sans Serif",
+   //   "Segoe UI",
+   //   "Tahoma",
+   //   "Times New Roman",
+   //   "Trebuchet MS",
+   //   "Verdana"
+   //};
+
    bool is_dark_ = false;
    color c_ = GetRandomColor(is_dark_);
 
@@ -1016,12 +1033,13 @@ color c__ = GetRandomColor(is_dark__);
    // clrLimeGreen
    obj_Btn_TP_SL_UPDATE2.ColorBackground(c_); //--- Set the background color
    obj_Btn_TP_SL_UPDATE2.ColorBorder(c_); //--- Set the border color
-   obj_Btn_TP_SL_UPDATE2.Text( "//|----------TP/SL UPDATE----------|"); //--- Set the button text
+   obj_Btn_TP_SL_UPDATE2.Text( "//|-----------TP/SL UPDATE-----------|"); //--- Set the button text
    // obj_Btn_TP_SL_UPDATE2.Text( CharToString(165) + " TP/SL UPDATE" ); // + "|---TP/SL UPDATE---|"); //--- Set the button text
    obj_Btn_TP_SL_UPDATE2.Color( is_dark_ == true ? clrWhite : clrBlack); //--- Set the text color
    //obj_Btn_TP_SL_UPDATE2.Font("Calibri"); //--- Set the font style
    // obj_Btn_TP_SL_UPDATE2.FontSize(16); //--- Set the font size
-   obj_Btn_TP_SL_UPDATE2.Font("Arial black");
+   // obj_Btn_TP_SL_UPDATE2.Font("Arial black");
+   obj_Btn_TP_SL_UPDATE2.Font("Arial");
    obj_Btn_TP_SL_UPDATE2.FontSize(13);
 
    //|-----------------------------|
