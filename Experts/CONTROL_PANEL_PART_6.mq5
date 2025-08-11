@@ -188,11 +188,13 @@ int OnInit() {
    //obj_Btn_X.FontSize(17); //--- Set font size of the close button
 
    //--- HEADER LABEL
-   obj_Lbl_HEADER.Create(0, Lbl_HEADER, 0, 40, 33, 0, 0); //--- Create the header label at specified coordinates
-   obj_Lbl_HEADER.Text("Control Panel"); //--- Set text of the header label
+   obj_Lbl_HEADER.Create(0, Lbl_HEADER, 0, 43, 33, 0, 0); //--- Create the header label at specified coordinates
+   obj_Lbl_HEADER.Text("//|-------------------- CONTROL PANEL -----------------------|"); //--- Set text of the header label
    // obj_Lbl_HEADER.Color(clrRed); //--- Set text color of the header label
    obj_Lbl_HEADER.Color(clrBlack); //--- Set text color of the header label
-   obj_Lbl_HEADER.Font("Cooper black"); //--- Set font of the header label to Cooper Black
+   // obj_Lbl_HEADER.Font("Cooper black"); //--- Set font of the header label to Cooper Black
+   obj_Lbl_HEADER.Font("Calibri");
+   // obj_Lbl_HEADER.Align()
    // obj_Lbl_HEADER.FontSize(11); //--- Set font size of the header label
 
    //--- TRADE BUTTON
@@ -211,18 +213,19 @@ int OnInit() {
    obj_Btn_CLOSE.Size(90, 30); //--- Set size of the close button
    obj_Btn_CLOSE.ColorBackground(clrSilver); //--- Set background color of the close button
    obj_Btn_CLOSE.ColorBorder(clrSilver); //--- Set border color of the close button
-   obj_Btn_CLOSE.Text("Close"); //--- Set text of the close button
+   obj_Btn_CLOSE.Text("// Close"); //--- Set text of the close button
    obj_Btn_CLOSE.Color(clrBlack); //--- Set text color of the close button
    // obj_Btn_CLOSE.Font("Arial Black"); //--- Set font of the close button to Arial Black
    obj_Btn_CLOSE.Font("Arial black");
    obj_Btn_CLOSE.FontSize(11); //--- Set font size of the close button
-
+   // STRIKEOUT
+   
    //--- INFO BUTTON
    obj_Btn_INFO.Create(0, Btn_INFO, 0, 40 + obj_Btn_TRADE.Width() + 10 + obj_Btn_CLOSE.Width() + 10, 60+3, 0, 0); //--- Create the info button at specified coordinates
    obj_Btn_INFO.Size(90, 30); //--- Set size of the info button
    obj_Btn_INFO.ColorBackground( clrSilver ); //--- Set background color of the info button
    // obj_Btn_INFO.ColorBorder(clrSilver); //--- Set border color of the info button
-   obj_Btn_INFO.Text("Info"); //--- Set text of the info button
+   obj_Btn_INFO.Text("// Info"); //--- Set text of the info button
    obj_Btn_INFO.Color(clrBlack); //--- Set text color of the info button
    // obj_Btn_INFO.Font("Arial Black"); //--- Set font of the info button to Arial Black
    obj_Btn_INFO.Font("Arial black");
@@ -814,12 +817,15 @@ void createSection_Trade() {
    //--- LOTS EDIT
    obj_Edit_LOTS.Create(0,Edit_LOTS,0,x_+145,y_,0,0); //--- Create the lot size edit field
    obj_Edit_LOTS.Size(76,25); //--- Set the edit field size
-   obj_Edit_LOTS.ColorBackground(clrWhite); //--- Set the background color
+   obj_Edit_LOTS.ColorBackground(clrYellow); //--- Set the background color
    obj_Edit_LOTS.ColorBorder(clrBlack); //--- Set the border color
+   // obj_Edit_LOTS.ColorBorder(clrDarkBlue); //--- Set the border color
    obj_Edit_LOTS.Text("0.01"); //--- Set the default text
-   obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
+   // obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
+   obj_Edit_LOTS.Color(clrDarkBlue); //--- Set the text color
    obj_Edit_LOTS.Font("Times new roman bold"); //--- Set the font style
    obj_Edit_LOTS.FontSize(15); //--- Set the font size
+   // obj_Edit_LOTS.FontSize(16); //--- Set the font size
 
    //--- PRICE LABEL
    obj_Lbl_PRICE.Create(0,Lbl_PRICE,0,x_,y_+30,0,0); //--- Create the price label
@@ -1004,7 +1010,7 @@ void createSection_Trade() {
    // clrLimeGreen
    obj_Btn_TP_SL_UPDATE2.ColorBackground(c_); //--- Set the background color
    obj_Btn_TP_SL_UPDATE2.ColorBorder(c_); //--- Set the border color
-   obj_Btn_TP_SL_UPDATE2.Text( "|---TP/SL UPDATE---|"); //--- Set the button text
+   obj_Btn_TP_SL_UPDATE2.Text( "//|----------TP/SL UPDATE----------|"); //--- Set the button text
    // obj_Btn_TP_SL_UPDATE2.Text( CharToString(165) + " TP/SL UPDATE" ); // + "|---TP/SL UPDATE---|"); //--- Set the button text
    obj_Btn_TP_SL_UPDATE2.Color(clrWhite); //--- Set the text color
    obj_Btn_TP_SL_UPDATE2.Font("Calibri"); //--- Set the font style
@@ -1462,6 +1468,9 @@ color GetRandomColor() {
 //|                                                                  |
 //+------------------------------------------------------------------+
 int MathRandInt(const int min, const int max) {
+   
+   MathSrand(GetTickCount()); 
+   
    double f   = (MathRand() / 32768.0);
    
    return min + (int)(f * (max - min));
