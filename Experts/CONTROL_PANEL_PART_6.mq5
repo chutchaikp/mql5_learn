@@ -21,6 +21,11 @@ CButton obj_Btn_MAIN;                                       //--- Main button ob
 CButton obj_Btn_HEADER;                                     //--- Header button object
 CButton obj_Btn_X;                                          //--- Close button (X) object
 CButton obj_Btn_TRADE;                                     //--- Trade button object
+
+CButton obj_Btn_LOT02;
+CButton obj_Btn_LOT06;
+CButton obj_Btn_LOT10;
+
 CButton obj_Btn_CLOSE;                                      //--- Close button object
 CButton obj_Btn_INFO;                                       //--- Information button object
 CButton obj_Btn_RISK;                                       //--- Risk button object
@@ -89,6 +94,11 @@ CLabel obj_Lbl_TP;                                          //--- Take Profit la
 #define Btn_HEADER "Btn_HEADER"                               //--- Button name for the header button
 #define Btn_X "Btn_X"                                        //--- Button name for the close button
 #define Btn_TRADE "Btn_TRADE"                               //--- Button name for the trade button
+
+#define Btn_LOT02 "Btn_LOT02"
+#define Btn_LOT06 "Btn_LOT06"
+#define Btn_LOT10 "Btn_LOT10"
+
 #define Btn_CLOSE "Btn_CLOSE"                                //--- Button name for the close button
 #define Btn_INFO "Btn_INFO"                                  //--- Button name for the info button
 
@@ -203,10 +213,8 @@ int OnInit() {
    obj_Btn_TRADE.Create(0, Btn_TRADE, 0, 40, 60+3, 0, 0); //--- Create the trade button at specified coordinates
    obj_Btn_TRADE.Size(90, 30); //--- Set size of the trade button
    obj_Btn_TRADE.ColorBackground(clrDimGray); //--- Set background color of the trade button
-   // obj_Btn_TRADE.ColorBorder(clrYellow); //--- Set border color of the trade button
    obj_Btn_TRADE.Text("TRADE"); //--- Set text of the trade button
    obj_Btn_TRADE.Color(clrWhite); //--- Set text color of the trade button
-   // obj_Btn_TRADE.Font("Arial Black"); //--- Set font of the trade button to Arial Black
    obj_Btn_TRADE.Font("Arial black");
    obj_Btn_TRADE.FontSize(11); //--- Set font size of the trade button
 
@@ -767,7 +775,19 @@ void OnChartEvent(
                }
             }
          }
+         
+      } else if ( sparam==obj_Btn_LOT02.Name() ) {
+         // Print("OBJECT CLICKED = ",obj_Btn_LOT02.Name());
+         obj_Edit_LOTS.Text("0.02");
+      } else if ( sparam==obj_Btn_LOT06.Name() ) {
+         // Print("OBJECT CLICKED = ",obj_Btn_LOT06.Name());
+         obj_Edit_LOTS.Text("0.06");
+      }else if ( sparam==obj_Btn_LOT10.Name() ) {
+         // Print("OBJECT CLICKED = ",obj_Btn_LOT10.Name());
+         obj_Edit_LOTS.Text("0.10");
       }
+      
+      
 
 
    }
@@ -823,16 +843,53 @@ void createSection_Trade() {
 
    //--- LOTS EDIT
    obj_Edit_LOTS.Create(0,Edit_LOTS,0,x_+145,y_,0,0); //--- Create the lot size edit field
-   obj_Edit_LOTS.Size(76,25); //--- Set the edit field size
-   obj_Edit_LOTS.ColorBackground(c__); //--- Set the background color
-   obj_Edit_LOTS.ColorBorder(clrBlack); //--- Set the border color
-   // obj_Edit_LOTS.ColorBorder(clrDarkBlue); //--- Set the border color
-   obj_Edit_LOTS.Text("0.01"); //--- Set the default text
-   // obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
+   obj_Edit_LOTS.Size(40+6,25); //--- Set the edit field size
+   obj_Edit_LOTS.ColorBackground(clrWhite); // c__); //--- Set the background color
+   // obj_Edit_LOTS.ColorBorder(clrBlack); //--- Set the border color
+   // level of mind ? // 0.01 -> 0.02 -> 0.04 -> 0.08 --- 0.1 //--- Set the default text
+   obj_Edit_LOTS.Text("0.02");
    obj_Edit_LOTS.Color(clrBlack); //--- Set the text color
    obj_Edit_LOTS.Font("Times new roman bold"); //--- Set the font style
    obj_Edit_LOTS.FontSize(15); //--- Set the font size
-   // obj_Edit_LOTS.FontSize(16); //--- Set the font size
+
+
+
+
+
+//   TODO:
+//- EA - CONTROL PANEL: ADD LOT SIZE 3 BUTTONS [ 0.02, 0.05, 0.1, 0.2? ]
+//obj_Btn_TRADE
+   //--- LOT SIZE 0.02 BUTTON
+   obj_Btn_LOT02.Create(0, Btn_LOT02, 0, x_+145+obj_Edit_LOTS.Width()+2, y_, 0, 0);
+   obj_Btn_LOT02.Size(30, 25);
+   obj_Btn_LOT02.ColorBackground(c__);
+   obj_Btn_LOT02.ColorBorder(c__);
+   obj_Btn_LOT02.Text(".02");
+   obj_Btn_LOT02.Color(clrBlack);
+   obj_Btn_LOT02.Font("Arial Black");
+   obj_Btn_LOT02.FontSize(10);
+
+   obj_Btn_LOT06.Create(0, Btn_LOT06, 0, x_+145+obj_Edit_LOTS.Width()+obj_Btn_LOT02.Width()+2+2, y_, 0, 0);
+   obj_Btn_LOT06.Size(30, 25);
+   obj_Btn_LOT06.ColorBackground(c__);
+   obj_Btn_LOT06.ColorBorder(c__);
+   obj_Btn_LOT06.Text(".06");
+   obj_Btn_LOT06.Color(clrBlack);
+   obj_Btn_LOT06.Font("Arial Black");
+   obj_Btn_LOT06.FontSize(10);
+
+   obj_Btn_LOT10.Create(0, Btn_LOT10, 0, x_+145+obj_Edit_LOTS.Width()+obj_Btn_LOT02.Width()+obj_Btn_LOT06.Width()+2+2+2, y_, 0, 0);
+   obj_Btn_LOT10.Size(30, 25);
+   obj_Btn_LOT10.ColorBackground(c__);
+   obj_Btn_LOT10.ColorBorder(c__);
+   obj_Btn_LOT10.Text(".10");
+   obj_Btn_LOT10.Color(clrBlack);
+   obj_Btn_LOT10.Font("Arial Black");
+   obj_Btn_LOT10.FontSize(10);
+
+
+
+
 
    //--- PRICE LABEL
    obj_Lbl_PRICE.Create(0,Lbl_PRICE,0,x_,y_+30,0,0); //--- Create the price label
@@ -978,7 +1035,7 @@ void createSection_Trade() {
    obj_Btn_CLOSEALL2.Create(0,Btn_CLOSEALL2,0,40+190-40,y_+(30*5)+25+3+50,0,0); //--- Create the buy stop button
    obj_Btn_CLOSEALL2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALL2.ColorBackground(clrBlack); //--- Set the background color
-   obj_Btn_CLOSEALL2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALL2.ColorBorder(clrAqua); // clrTomato); //--- Set the border color
    obj_Btn_CLOSEALL2.Text("CLOSE ALL"); //--- Set the button text
    obj_Btn_CLOSEALL2.Color(clrYellow); //--- Set the text color
    obj_Btn_CLOSEALL2.Font("Calibri"); //--- Set the font style
@@ -991,7 +1048,7 @@ void createSection_Trade() {
    obj_Btn_CLOSEALLSELL2.Create(0,Btn_CLOSEALLSELL2,0,x_,y_+(30*5)+25+3+50+50,0,0); //--- Create the sell stop button
    obj_Btn_CLOSEALLSELL2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALLSELL2.ColorBackground(clrBlack); //--- Set the background color
-   obj_Btn_CLOSEALLSELL2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALLSELL2.ColorBorder(clrBlack); // clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLSELL2.Text("CLOSE ALL SELL"); //--- Set the button text
    obj_Btn_CLOSEALLSELL2.Color(clrRed); //--- Set the text color
    obj_Btn_CLOSEALLSELL2.Font("Calibri"); //--- Set the font style
@@ -1001,7 +1058,7 @@ void createSection_Trade() {
    obj_Btn_CLOSEALLBUY2.Create(0,Btn_CLOSEALLBUY2,0,40+190-40,y_+(30*5)+25+3+50+50,0,0); //--- Create the buy stop button
    obj_Btn_CLOSEALLBUY2.Size(140,25*2-3-3); //--- Set the button size
    obj_Btn_CLOSEALLBUY2.ColorBackground(clrBlack); //--- Set the background color
-   obj_Btn_CLOSEALLBUY2.ColorBorder(clrTomato); //--- Set the border color
+   obj_Btn_CLOSEALLBUY2.ColorBorder(clrBlack); // clrTomato); //--- Set the border color
    obj_Btn_CLOSEALLBUY2.Text("CLOSE ALL BUY"); //--- Set the button text
    obj_Btn_CLOSEALLBUY2.Color(clrRed); //--- Set the text color
    obj_Btn_CLOSEALLBUY2.Font("Calibri"); //--- Set the font style
@@ -1039,8 +1096,8 @@ void createSection_Trade() {
    //obj_Btn_TP_SL_UPDATE2.Font("Calibri"); //--- Set the font style
    // obj_Btn_TP_SL_UPDATE2.FontSize(16); //--- Set the font size
    // obj_Btn_TP_SL_UPDATE2.Font("Arial black");
-   obj_Btn_TP_SL_UPDATE2.Font("Arial");
-   obj_Btn_TP_SL_UPDATE2.FontSize(13);
+   obj_Btn_TP_SL_UPDATE2.Font("Arial Black");
+   obj_Btn_TP_SL_UPDATE2.FontSize(12);
 
    //|-----------------------------|
 
@@ -1346,6 +1403,10 @@ void destroySection_Trade() {
    obj_Btn_CLOSEALLSELL2.Destroy();
    obj_Btn_CLOSEALLBUY2.Destroy();
    obj_Btn_TP_SL_UPDATE2.Destroy();
+
+   obj_Btn_LOT02.Destroy();
+   obj_Btn_LOT06.Destroy();
+   obj_Btn_LOT10.Destroy();
 
 }
 
