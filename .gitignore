@@ -1,5 +1,7 @@
 # mql5 
 *.ex5
+*.mp3
+*.mp4
 
 *.dat
 experts.dat
